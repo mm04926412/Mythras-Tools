@@ -3,6 +3,7 @@ from discord.ext import commands
 import random
 from math import ceil
 diff_dic = {'veryeasy':2.,'easy':1.5,'normal':1.,'hard':2/3,'formidable':1/2,'herculean':1/10}
+succ_dic = {1:'Critical Success',2:'Success',3:'Failure',4:'Critical Failure'} #Unfortunate name I know
 TOKEN = 'Sample'
 client = discord.Client()
 bot = commands.Bot('$')
@@ -71,8 +72,8 @@ async def contestedroll(ctx,skill1,difficulty1,skill2,difficulty2):
         else:
             winner='Defender'
             degrees = 0     
-    attacker_string = ('Attacker rolls ' + str(roll1) + ' with requirement of ' + str(effective_skill1))
-    defender_string = ('Defender rolls ' + str(roll2) + ' with requirement of ' + str(effective_skill2))
+    attacker_string = ('Attacker rolls ' + str(roll1) + ' with requirement of ' + str(effective_skill1) + ' - ' + succ_dic[success1])
+    defender_string = ('Defender rolls ' + str(roll2) + ' with requirement of ' + str(effective_skill2) + ' - ' + succ_dic[success2])
     result_string   = (winner + ' wins with ' + str(degrees) + ' degree/s of success')
     await ctx.send(attacker_string)
     await ctx.send(defender_string)
