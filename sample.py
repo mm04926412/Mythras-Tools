@@ -24,9 +24,9 @@ async def skillroll(ctx,skill1,difficulty1):
     skill1 = int(skill1)
     effective_skill1 = ceil(skill1*diff_dic[difficulty1])
     roll = random.randint(1,100)
-    if roll < effective_skill1/10:
+    if roll <= effective_skill1/10:
         success1 = 'Critical Success!!!'
-    elif roll < effective_skill1:
+    elif roll <= effective_skill1:
         success1 = 'Success'
     elif roll > effective_skill1:
         success1 = 'Failed'
