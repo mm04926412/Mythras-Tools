@@ -13,7 +13,7 @@ from math import ceil
 
 diff_dic = {'veryeasy':2.,'easy':1.5,'normal':1.,'hard':2/3,'formidable':1/2,'herculean':1/10}
 
-TOKEN = 'Nearly forgot to remove this'
+TOKEN = 'Sample'
 
 client = discord.Client()
 
@@ -52,19 +52,27 @@ async def contestedroll(ctx,skill1,difficulty1,skill2,difficulty2):
     
     effective_skill1 = ceil(skill1*diff_dic[difficulty1])
     effective_skill2 = ceil(skill2*diff_dic[difficulty2])
+    maximum_skill = max(effective_skill1,effective_skill2)
+    if maximum_skill > 100:
+        effective_skill1 = effective_skill1 - maximum_skill + 100
+        effective_skill2 = effective_skill2 - maximum_skill + 100
+        if effective_skill1 < 5:
+            effective_skill1 = 5
+        if effective_skill2 < 5:
+            effective_skill2 = 5
     
-    if roll1 < effective_skill1/10:
+    if roll1 <= effective_skill1/10:
         success1 = 1
-    elif roll1 < effective_skill1:
+    elif roll1 <= effective_skill1:
         success1 = 2
     elif roll1 > effective_skill1:
         success1 = 3
     elif roll1 == 100:
         success1 = 4
         
-    if roll2 < effective_skill2/10:
+    if roll2 <= effective_skill2/10:
         success2 = 1
-    elif roll2 < effective_skill2:
+    elif roll2 <= effective_skill2:
         success2 = 2
     elif roll2 > effective_skill2:
         success2 = 3
